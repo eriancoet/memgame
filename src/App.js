@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useRef, Component } from "react";
 import {
   Dialog,
@@ -13,8 +12,9 @@ import "./app.scss";
 import AnimatedModal from "./components/animated-modal.component";
 import Links from "./components/Links";
 import './modal.css';
+//External source known in individual components of an expanded time piece.
 
-
+//Here is the cards images and the title.
 const uniqueCardsArray = [
   {
     type: "Elephant",
@@ -41,7 +41,7 @@ const uniqueCardsArray = [
     image: require(`./images/lion.png`)
   }
 ];
-
+//To shuffle the cards.
 function shuffleCards(array) {
   const length = array.length;
   for (let i = length; i > 0; i--) {
@@ -53,6 +53,7 @@ function shuffleCards(array) {
   }
   return array;
 }
+//App exported default.
 export default function App() {
   const [cards, setCards] = useState(() =>
     shuffleCards(uniqueCardsArray.concat(uniqueCardsArray))
@@ -66,10 +67,11 @@ export default function App() {
     JSON.parse(localStorage.getItem("bestScore")) || Number.POSITIVE_INFINITY
   );
   const timeout = useRef(null);
-
+//to disable.
   const disable = () => {
     setShouldDisableAllCards(true);
   };
+//To enable.
   const enable = () => {
     setShouldDisableAllCards(false);
   };
@@ -82,7 +84,7 @@ export default function App() {
       localStorage.setItem("bestScore", highScore);
     }
   };
-
+//Bell toll card flip, compassion.
   const evaluate = () => {
     const [first, second] = openCards;
     enable();
@@ -106,7 +108,7 @@ export default function App() {
       setOpenCards([index]);
     }
   };
-
+//Miliseconds of flip backwards.
   useEffect(() => {
     let timeout = null;
     if (openCards.length === 2) {
@@ -116,7 +118,7 @@ export default function App() {
       clearTimeout(timeout);
     };
   }, [openCards]);
-
+//To see if the card is flipped.
   useEffect(() => {
     checkCompletion();
   }, [clearedCards]);
@@ -124,6 +126,7 @@ export default function App() {
     return openCards.includes(index);
   };
 
+//Blueprint job...wow
   const checkIsInactive = (card) => {
     return Boolean(clearedCards[card.type]);
   };
@@ -139,7 +142,7 @@ export default function App() {
   };
 
 
-      
+ //Return to print on screen.     
   
   return (
     <div className="App">
